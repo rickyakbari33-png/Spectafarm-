@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spectafarm Mango Pulp Store | Магазин Манго Пюре Spectafarm</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #fff8e1; color: #333; }
+    header { background: #ffa000; padding: 20px; text-align: center; color: white; }
+    header h1 { margin: 0; }
+    .language-switch { margin-top: 10px; }
+    .hero { padding: 40px 20px; text-align: center; background: linear-gradient(#ffe082, #fff8e1); }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; text-align: center; }
+    .card img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px; }
+    .price { font-size: 18px; font-weight: bold; margin: 10px 0; }
+    button { background: #ff9800; border: none; padding: 12px 20px; border-radius: 8px; color: white; cursor: pointer; font-size: 16px; }
+    button:hover { background: #fb8c00; }
+    .payment { padding: 30px 20px; background: #fff3cd; margin: 20px; border-radius: 12px; }
+    .payment input, .payment select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc; }
+    .vote-section { padding: 30px 20px; background: #e0f7fa; margin: 20px; border-radius: 12px; text-align: center; }
+    footer { text-align: center; padding: 15px; background: #ffa000; color: white; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 data-en="🥭 Spectafarm Mango Pulp Store" data-ru="🥭 Магазин Манго Пюре Spectafarm">🥭 Spectafarm Mango Pulp Store</h1>
+    <p data-en="Owner: Ricky Akbari | Fresh & Pure Alphonso Mango Pulp" data-ru="Владелец: Рикки Акбари | Свежий и чистый манго пюре Альфонсо">Owner: Ricky Akbari | Fresh & Pure Alphonso Mango Pulp</p>
+    <div class="language-switch">
+      <button onclick="setLanguage('en')">English</button>
+      <button onclick="setLanguage('ru')">Русский</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2 data-en="Best Quality Mango Pulp" data-ru="Манго Пюре Лучшего Качества">Best Quality Mango Pulp</h2>
+    <p data-en="Perfect for ice cream, juice, shakes & sweets" data-ru="Идеально для мороженого, сока, шейков и сладостей">Perfect for ice cream, juice, shakes & sweets</p>
+  </section>
+
+  <section class="products">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1591073113125-e46713c829ed" alt="Mango Pulp" />
+      <h3 data-en="1 Kg Mango Pulp" data-ru="1 кг Манго Пюре">1 Kg Mango Pulp</h3>
+      <p class="price">₹250</p>
+      <button onclick="buyNow('1 Kg Mango Pulp', 250)" data-en="Buy Now" data-ru="Купить">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f" alt="Mango Pulp" />
+      <h3 data-en="5 Kg Mango Pulp" data-ru="5 кг Манго Пюре">5 Kg Mango Pulp</h3>
+      <p class="price">₹1150</p>
+      <button onclick="buyNow('5 Kg Mango Pulp', 1150)" data-en="Buy Now" data-ru="Купить">Buy Now</button>
+    </div>
+  </section>
+
+  <section class="payment" id="paymentSection" style="display:none;">
+    <h2 data-en="Payment & Delivery" data-ru="Оплата и доставка">Payment & Delivery</h2>
+    <p id="orderDetails"></p>
+    <p><strong data-en="Payment Method:" data-ru="Метод оплаты:"></strong></p>
+    <ul>
+      <li>UPI</li>
+      <li>Debit / Credit Card</li>
+      <li>Net Banking</li>
+      <li>VTB Bank (Russia)</li>
+      <li>Tinkoff Bank (Russia)</li>
+    </ul>
+
+    <h3 data-en="Delivery Address (Only Moscow & Moscow Oblast)" data-ru="Адрес доставки (только Москва и Московская область)"></h3>
+    <input type="text" id="address" placeholder="Enter your address" data-en="Enter your address" data-ru="Введите ваш адрес" />
+    <button onclick="validateAndPay()" data-en="Confirm & Pay" data-ru="Подтвердить и оплатить">Confirm & Pay</button>
+  </section>
+
+  <section class="vote-section">
+    <h2 data-en="Summer Delivery Voting" data-ru="Голосование за летнюю доставку">Summer Delivery Voting</h2>
+    <p data-en="Will you order mango pulp if delivery starts in summer?" data-ru="Вы закажете манго пюре, если доставка начнется летом?">Will you order mango pulp if delivery starts in summer?</p>
+    <button onclick="vote('yes')" data-en="Yes, I will" data-ru="Да, закажу">Yes, I will</button>
+    <button onclick="vote('no')" data-en="No, I won't" data-ru="Нет, не буду">No, I won't</button>
+    <p id="voteResult" style="margin-top:10px;"></p>
+  </section>
+
+  <footer>
+    <p data-en="© 2026 Spectafarm Mango Pulp Store | All Rights Reserved" data-ru="© 2026 Магазин Манго Пюре Spectafarm | Все права защищены">© 2026 Spectafarm Mango Pulp Store | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    let selectedProduct = "";
+    let selectedPrice = 0;
+    let votes = { yes: 0, no: 0 };
+
+    function buyNow(product, price) {
+      selectedProduct = product;
+      selectedPrice = price;
+      document.getElementById('paymentSection').style.display = 'block';
+      document.getElementById('orderDetails').innerText = `You are buying ${product} for ₹${price}`;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function validateAndPay() {
+      const address = document.getElementById('address').value.trim();
+      if (!address) { alert('Please enter your address'); return; }
+      const regex = /Москва|Moscow/i;
+      if (!regex.test(address)) { alert('Delivery is only available for Moscow & Moscow Oblast'); return; }
+      alert(`Order confirmed for ${selectedProduct} at address: ${address}. Payment gateway integration required.`);
+    }
+
+    function vote(choice) {
+      if (choice === 'yes') votes.yes++;
+      else if (choice === 'no') votes.no++;
+      document.getElementById('voteResult').innerText = `Votes - Yes: ${votes.yes}, No: ${votes.no}`;
+    }
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.innerText = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ru');
+      });
+    }
+  </script>
+</body>
+</html>
